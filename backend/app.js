@@ -30,7 +30,8 @@ games = [
     genre: 'Action',
     description: 'Lorem ipsum balblablalbla2',
     modes: ['Single', 'Multi']
-  }
+  },
+
 ];
 
 app.use(bodyParser.json());

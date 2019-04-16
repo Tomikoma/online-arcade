@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
+import { GameComponent} from './main/game/game.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MainComponent } from './main/main.component';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    MainComponent
+    MainComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
