@@ -1,6 +1,25 @@
-mat-expansion-panel {
+/*mat-expansion-panel {
   margin-top:1%;
   margin-left: 10%;
   margin-right: 10%;
 
+}*/
+
+mat-card {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 1%;
+}
+
+mat-card img{
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 40%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+mat-card-title {
+  display: flex;
+  justify-content: center;
 }

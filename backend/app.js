@@ -31,6 +31,22 @@ games = [
     description: 'Lorem ipsum balblablalbla2',
     modes: ['Single', 'Multi']
   },
+  {
+    id: '3',
+    title: 'Pac-man3',
+    releaseDate: new Date(1985),
+    genre: 'Action',
+    description: 'Lorem ipsum balblablalbla2',
+    modes: ['Single', 'Multi']
+  },
+  {
+    id: '4',
+    title: 'Pac-man4',
+    releaseDate: new Date(1985),
+    genre: 'Action',
+    description: 'Lorem ipsum balblablalbla2',
+    modes: ['Single', 'Multi']
+  },
 
 ];
 
