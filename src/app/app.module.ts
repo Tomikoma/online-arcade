@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule, MatButtonModule } from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
+import {MatToolbarModule, MatButtonModule, MatExpansionModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,8 +27,10 @@ import { MainComponent } from './main/main.component';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatButtonModule,
+    MatExpansionModule,
     FlexLayoutModule
   ],
   providers: [],

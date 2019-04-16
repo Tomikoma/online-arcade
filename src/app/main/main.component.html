@@ -1,3 +1,9 @@
-<p>
-  main works!
-</p>
+<mat-expansion-panel *ngFor="let game of games">
+  <mat-expansion-panel-header >
+    {{game.title}}
+  </mat-expansion-panel-header>
+  {{game.description}}
+  <mat-action-row>
+    <a mat-raised-button routerLink>Tovább az adatlapra</a>
+  </mat-action-row>
+</mat-expansion-panel>
