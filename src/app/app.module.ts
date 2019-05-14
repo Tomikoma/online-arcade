@@ -9,7 +9,9 @@ import {
   MatExpansionModule,
   MatCardModule,
   MatProgressSpinnerModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatFormFieldModule,
+  MatInputModule
     } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -45,6 +47,8 @@ import { CabinetComponent } from './main/game/cabinet/cabinet.component';
     MatCardModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
     FlexLayoutModule
   ],
   providers: [],
