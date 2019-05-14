@@ -8,7 +8,7 @@ const userRoutes = require("./routes/user");
 const app=express();
 
 
-mongoose.connect("mongodb+srv://tom:MVwYEXXFzW1r5sVa@onlinearcade-1uy5h.mongodb.net/node-angular?retryWrites=true",
+mongoose.connect("mongodb+srv://tom:MVwYEXXFzW1r5sVa@onlinearcade-1uy5h.mongodb.net/node-angular",
 {useNewUrlParser: true})
 .then(() => {
   console.log("Connected to database!");
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
