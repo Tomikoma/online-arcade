@@ -2,9 +2,9 @@ const express=require("express");
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose")
 
-const Game=require('./models/game');
-
+const gamesRoutes = require("./routes/games");
 const app=express();
+
 
 mongoose.connect("mongodb+srv://tom:MVwYEXXFzW1r5sVa@onlinearcade-1uy5h.mongodb.net/node-angular?retryWrites=true",
 {useNewUrlParser: true})
@@ -32,13 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/games", (req, res, next) => {
-  Game.find().then(documents => {
-    res.status(200).json({
-      message: "Games fetched successfully!",
-      games: documents
-    });
-  });
-});
+app.use("/api/games", gamesRoutes);
+
 
 module.exports = app;

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 export class GameService {
 
   private games: Game[] = [];
-  private gamesUpdated = new Subject<Game[]>();
+  private gamesUpdated = new Subject<{games: Game[], gameCount: number}>();
 
   constructor(private http: HttpClient) {}
 
@@ -21,13 +21,14 @@ export class GameService {
     });
   }*/
 
-  getGames() {
+  getGames(gamesPerPage: number, currentPage: number) {
+    const queryParams =  `?pagesize=${gamesPerPage}&page=${currentPage}`;
     this.http
-      .get<{ message: string; games: any }>('http://localhost:3000/api/games')
+      .get<{ message: string; games: any , maxGames: number}>('http://localhost:3000/api/games' + queryParams)
       .pipe(
         map(gameData => {
           // console.log(gameData);
-          return gameData.games.map(game => {
+          return {games: gameData.games.map(game => {
             return {
               id: game._id,
               title: game.title,
@@ -37,12 +38,14 @@ export class GameService {
               description: game.description,
               modes: game.modes,
             };
-          });
+          }),
+          maxGames: gameData.maxGames
+        };
         })
       )
       .subscribe(transformedGames => {
-        this.games = transformedGames;
-        this.gamesUpdated.next([...this.games]);
+        this.games = transformedGames.games;
+        this.gamesUpdated.next({games: [...this.games], gameCount: transformedGames.maxGames});
       });
   }
 

@@ -14,7 +14,7 @@
 </div>
 -->
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading && this.games.length>0">
   <mat-card *ngFor="let game of games">
     <mat-card-header>
         <mat-card-title>{{game.title}}</mat-card-title>
@@ -31,3 +31,4 @@
     </mat-card-actions>
   </mat-card>
 </div>
+<mat-paginator [length]="totalGames" [pageSize]="gamesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="this.games.length>0"></mat-paginator>

@@ -19,6 +19,10 @@ mat-card img{
   margin-right: 5%;
 }
 
+mat-paginator {
+  margin-top: 1rem;
+}
+
 mat-card-title {
   display: flex;
   justify-content: center;

@@ -24,16 +24,16 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.gameService.getGames();
-    this.gameSub = this.gameService.getGameUpdateListener()
-      .subscribe((games: Game[]) => {
-        this.game = games.find(game => game.id === this.gameId);
-      });
+    //this.gameService.getGames();
+    //this.gameSub = this.gameService.getGameUpdateListener()
+     // .subscribe((games: Game[]) => {
+    //    this.game = games.find(game => game.id === this.gameId);
+    //  });
   }
 
   ngOnDestroy() {
-    this.routeSub.unsubscribe();
-    this.gameSub.unsubscribe();
+   // this.routeSub.unsubscribe();
+    //this.gameSub.unsubscribe();
   }
 
 }
