@@ -3,6 +3,7 @@ export interface Game {
   title: string;
   releaseDate: Date;
   genre: string;
+  images: string[];
   description: string;
   modes: string[];
 }
