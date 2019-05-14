@@ -1,6 +1,7 @@
 const express = require("express");
 const Game=require('../models/game');
 const router = express.Router();
+const checkAuth = require("../middleware/check-auth");
 
 router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;
