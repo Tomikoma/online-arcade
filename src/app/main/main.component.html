@@ -13,22 +13,21 @@
 </mat-accordion>
 </div>
 -->
-
-<mat-card *ngFor="let game of games" >
-  <mat-card-header>
-      <mat-card-title>{{game.title}}</mat-card-title>
-  </mat-card-header>
-  <img mat-card-image src="https://natgeo.imgix.net/factsheets/thumbnails/PACMAN.jpg?auto=compress,format&w=1024&h=560&fit=crop" alt="Photo of a Shiba Inu">
-  <img mat-card-image src="https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTck2bFw3B_YJSi5NTvuXiUBXoZPSwpuFFxv4ElNFne6s.._cLUx3RfkV.sX07zU_4hP8T5GlFhgGegab_nhMF_h7iuXeqTCsv6LWSeY1ZcVItjHVRMuZCtJ8j6BYnm2JwM0YtK6eTUidKlbbt0C5BRtqk1t1HsrRkV51.0P4vV1qo-&h=1080&w=1920&format=jpg" alt="Photo of a Shiba Inu">
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <a mat-raised-button [routerLink]="['/games', game.id]" routerLinkActive="router-link-active" >Tovább az adatlapra</a>
-    <button mat-button color="primary">SHARE</button>
-  </mat-card-actions>
-</mat-card>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngIf="!isLoading">
+  <mat-card *ngFor="let game of games">
+    <mat-card-header>
+        <mat-card-title>{{game.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{game.images[0]}}" alt="{{game.title}} image">
+    <img mat-card-image src="{{game.images[1]}}" alt="{{game.title}} image">
+    <mat-card-content>
+      Genre: {{game.genre}}
+      <br><br>
+      Modes: {{game.modes}}
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-raised-button [routerLink]="['/games', game.id]" routerLinkActive="router-link-active" >Tovább az adatlapra</a>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -11,15 +11,18 @@ import { GameService } from './game.service';
 export class MainComponent implements OnInit, OnDestroy {
 
   games: Game[] = [];
+  isLoading = false;
   private gamesSub: Subscription;
 
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.gameService.getGames();
     this.gamesSub = this.gameService
       .getGameUpdateListener()
       .subscribe((games: Game[]) => {
+        this.isLoading = false;
         this.games = games;
       });
   }

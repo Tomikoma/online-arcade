@@ -33,6 +33,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeSub.unsubscribe();
+    this.gameSub.unsubscribe();
   }
 
 }

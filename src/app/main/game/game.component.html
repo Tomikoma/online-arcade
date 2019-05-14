@@ -1,6 +1,12 @@
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    {{game?.title}}
-  </mat-expansion-panel-header>
-  <p>{{game?.genre}}</p>
-</mat-expansion-panel>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{game?.title}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{game?.description}}</p>
+    <p>Genre: {{game?.genre}}</p>
+    <p>Release: {{game?.releaseDate.getFullYear()}}</p>
+  </mat-card-content>
+</mat-card>
