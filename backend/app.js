@@ -1,8 +1,10 @@
+const path = require("path");
 const express=require("express");
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose")
 
 const gamesRoutes = require("./routes/games");
+const userRoutes = require("./routes/user");
 const app=express();
 
 
@@ -14,6 +16,9 @@ mongoose.connect("mongodb+srv://tom:MVwYEXXFzW1r5sVa@onlinearcade-1uy5h.mongodb.
 .catch(() => {
   console.log("Connection failed!");
 });
+
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 
 app.use(bodyParser.json());
@@ -33,6 +38,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/games", gamesRoutes);
+app.use("/api/user", userRoutes);
 
 
 module.exports = app;
