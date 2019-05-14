@@ -3,7 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {MatToolbarModule, MatButtonModule, MatExpansionModule, MatCard, MatCardModule  } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatExpansionModule,
+  MatCardModule,
+  MatProgressSpinnerModule
+    } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
 import { GameComponent} from './main/game/game.component';
+import { CabinetComponent } from './main/game/cabinet/cabinet.component';
 
 
 @NgModule({
@@ -22,7 +29,8 @@ import { GameComponent} from './main/game/game.component';
     LoginComponent,
     RegisterComponent,
     MainComponent,
-    GameComponent
+    GameComponent,
+    CabinetComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +42,7 @@ import { GameComponent} from './main/game/game.component';
     MatButtonModule,
     MatExpansionModule,
     MatCardModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule
   ],
   providers: [],
