@@ -31,4 +31,4 @@
     </mat-card-actions>
   </mat-card>
 </div>
-<mat-paginator [length]="totalGames" [pageSize]="gamesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="this.games.length>0"></mat-paginator>
+<mat-paginator [length]="totalGames" [pageSize]="gamesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="this.games?.length>0"></mat-paginator>

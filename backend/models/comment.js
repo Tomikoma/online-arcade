@@ -1,8 +1,10 @@
 const mongoose=require("mongoose");
 
 const commentSchema = mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, required: true},
-  game_id: { type: mongoose.Schema.Types.ObjectId, required: true},
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true},
+  gameId: { type: mongoose.Schema.Types.ObjectId, required: true},
+  content: { type: String, required: true},
+  commentDate: { type: Date, required: true}
 });
 
 

@@ -1,8 +1,9 @@
 const mongoose=require("mongoose");
 
 const rateSchema = mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, required: true},
-  game_id: { type: mongoose.Schema.Types.ObjectId, required: true},
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true},
+  gameId: { type: mongoose.Schema.Types.ObjectId, required: true},
+  rating: { type: Number, required: true}
 });
 
 

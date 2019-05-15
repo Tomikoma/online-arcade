@@ -11,7 +11,10 @@ import {
   MatProgressSpinnerModule,
   MatPaginatorModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatSliderModule,
+  MatListModule,
+  MatDividerModule
     } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -50,6 +53,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSliderModule,
+    MatListModule,
+    MatDividerModule,
     FlexLayoutModule
   ],
   providers: [
