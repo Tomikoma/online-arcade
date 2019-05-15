@@ -7,3 +7,6 @@ mat-card {
   margin-right: 25%;
   margin-top: 1%;
 }
+mat-spinner {
+  margin: auto;
+}

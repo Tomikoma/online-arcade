@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     this.authService.createUser(form.value.email,form.value.name,form.value.password);
   }
 }

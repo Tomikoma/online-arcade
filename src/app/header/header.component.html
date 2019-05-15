@@ -6,10 +6,13 @@
 
   <ul fxLayout="row">
     <li>
-      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Bejelentkezés</a>
+      <a mat-button routerLink="/login" routerLinkActive="mat-accent" *ngIf="!userIsAuthenticated">Sign in</a>
     </li>
     <li>
-      <a mat-button routerLink="/register" routerLinkActive="mat-accent">Regisztráció</a>
+      <a mat-button routerLink="/register" routerLinkActive="mat-accent" *ngIf="!userIsAuthenticated">Sign up</a>
+    </li>
+    <li>
+      <button mat-button (click)="logout()" *ngIf="userIsAuthenticated">Logout</button>
     </li>
   </ul>
 </mat-toolbar>
