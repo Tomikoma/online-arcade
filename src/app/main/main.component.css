@@ -36,3 +36,9 @@ mat-card-title {
 mat-spinner {
   margin: auto;
 }
+
+mat-expansion-panel {
+  width: 75%;
+  margin: auto;
+  margin-top:3%;
+}

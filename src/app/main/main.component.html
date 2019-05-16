@@ -1,6 +1,5 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<div *ngIf="!isLoading && this.games.length>0">
-  <mat-expansion-panel>
+<mat-expansion-panel *ngIf="!isloading">
     <mat-expansion-panel-header>
       <mat-panel-title> Search/Query paramters</mat-panel-title>
     </mat-expansion-panel-header>
@@ -8,7 +7,7 @@
     <div fxLayout="row">
       <mat-card class="checkbox" >
         <mat-card-content>
-          <h2 class="example-h2">Genres</h2>
+          <h2 class="example-h2">Years</h2>
           <section class="example-section" fxLayout="Column">
             <mat-checkbox name="{{item.getFullYear()}}" ngModel *ngFor="let item of years">{{item.getFullYear()}}</mat-checkbox>
           </section>
@@ -16,7 +15,7 @@
       </mat-card>
       <mat-card class="checkbox">
         <mat-card-content>
-          <h2 class="example-h2">Years</h2>
+          <h2 class="example-h2">Genres</h2>
           <section class="example-section" fxLayout="Column">
             <mat-checkbox name="{{item}}" ngModel *ngFor="let item of genres">{{item}}</mat-checkbox>
           </section>
@@ -29,6 +28,8 @@
   </form>
 
   </mat-expansion-panel>
+<div *ngIf="!isLoading && this.games.length>0">
+
 
 
   <mat-card *ngFor="let game of games" class="games">
@@ -43,7 +44,7 @@
       Modes: {{game.modes}}
     </mat-card-content>
     <mat-card-actions>
-      <a mat-raised-button [routerLink]="['/games', game.id]" routerLinkActive="router-link-active" >Tovább az adatlapra</a>
+      <a mat-raised-button [routerLink]="['/games', game.id]" routerLinkActive="router-link-active">More details</a>
     </mat-card-actions>
   </mat-card>
 </div>

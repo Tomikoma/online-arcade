@@ -23,6 +23,7 @@ export class MainComponent implements OnInit, OnDestroy {
   private gamesSub: Subscription;
   private yearsSub: Subscription;
   private genresSub: Subscription;
+  private gameSearchSub: Subscription;
 
   constructor(private gameService: GameService) {
     this.gameService.getYears();
@@ -71,6 +72,11 @@ export class MainComponent implements OnInit, OnDestroy {
       }
     });
     this.gameService.getGamesBySearch(searchYears, searchGenres);
+    this.gameSearchSub = this.gameService.getGameSearchUpdatedListener()
+      .subscribe(data => {
+        console.log(data);
+        this.games = data.games;
+      });
   }
 
   onChangedPage(pageData: PageEvent) {
@@ -84,6 +90,9 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.gamesSub.unsubscribe();
     this.yearsSub.unsubscribe();
+    if (this.gameSearchSub){
+      this.gameSearchSub.unsubscribe();
+    }
   }
 
 }

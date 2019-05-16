@@ -27,7 +27,7 @@ router.post("/search", (req, res, next) => {
       res.status(200).json({
         update: true,
         games: fetchedGames,
-        maxGames: count
+        maxGames: 0
       }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -46,7 +46,7 @@ router.post("/search", (req, res, next) => {
       res.status(200).json({
         update: true,
         games: fetchedGames,
-        maxGames: count
+        maxGames: 0
       }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -65,7 +65,7 @@ router.post("/search", (req, res, next) => {
       res.status(200).json({
         update: true,
         games: fetchedGames,
-        maxGames: count
+        maxGames: 0
       })
     }).catch(err => {
       console.log(err);

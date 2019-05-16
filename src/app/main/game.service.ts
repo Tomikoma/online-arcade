@@ -16,6 +16,7 @@ export class GameService {
   private commentsUpdateListener = new Subject<MyComment[]>();
   private yearsUpdateListener = new Subject<Date[]>();
   private genresUpdateListener = new Subject<string[]>();
+  private gamesSearchUpdated = new Subject<{games: Game[], gameCount: number}>();
   constructor(private http: HttpClient) {}
 
   /*getGames() {
@@ -52,7 +53,7 @@ export class GameService {
         if (!searchData.update) {
           return;
         } else {
-          this.gamesUpdated.next({games: searchData.games,gameCount: searchData.maxCount});
+          this.gamesSearchUpdated.next({games: searchData.games,gameCount: searchData.maxCount});
         }
       });
   }
@@ -128,6 +129,10 @@ export class GameService {
     .subscribe(ratingData => {
       this.ratingUpdateListener.next({rating: ratingData.rating, count: ratingData.count});
     });
+  }
+
+  getGameSearchUpdatedListener(){
+    return this.gamesSearchUpdated.asObservable();
   }
 
   getGenresUpdateListener() {

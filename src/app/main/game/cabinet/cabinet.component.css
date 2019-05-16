@@ -16,3 +16,9 @@ canvas {
   background-color: white;
   cursor: pointer;
 }
+
+mat-card {
+  width:60%;
+  margin:auto;
+  margin-top:3%;
+}
