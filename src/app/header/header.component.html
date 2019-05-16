@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <a routerLink="/" >Online-Arcade</a>
-
+  <button mat-button (click)="startOrStopMusic()"><span *ngIf="this.sound.playing()">Stop Music</span> <span *ngIf="!this.sound.playing()">Start Music</span></button>
   <!-- This fills the remaining space of the current row -->
   <span class="spacer"></span>
 

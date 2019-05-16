@@ -5,9 +5,83 @@ const Comment = require('../models/comment');
 const router = express.Router();
 const checkAuth = require("../middleware/check-auth");
 
+router.post("/search", (req, res, next) => {
+  const genres = req.body.genres;
+  const years = req.body.years;
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+
+
+  if(genres.length==0 && years.length==0) {
+    return res.status(200).json({
+      update: false
+    });
+  } else if(genres.length>0 && years.length==0) {
+    const gameQuery = Game.find({genre: genres});
+    let fetchedGames;
+    gameQuery.then(documents => {
+      fetchedGames = documents;
+      return Game.countDocuments({genre:genres});
+    })
+    .then(count => {
+      res.status(200).json({
+        update: true,
+        games: fetchedGames,
+        maxGames: count
+      }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+          message: "Something went wrong!"
+        })
+      });
+    })
+  } else if(genres.length==0 && years.length>0) {
+    const gameQuery = Game.find({releaseDate: years});
+    let fetchedGames;
+    gameQuery.then(documents => {
+      fetchedGames = documents;
+      return Game.countDocuments({releaseDate:years});
+    })
+    .then(count => {
+      res.status(200).json({
+        update: true,
+        games: fetchedGames,
+        maxGames: count
+      }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+          message: "Something went wrong!"
+        })
+      });
+    })
+  } else if (genres.length>0 && years.length>0) {
+    const gameQuery = Game.find({releaseDate: years, genre: genres});
+    let fetchedGames;
+    gameQuery.then(documents => {
+      fetchedGames = documents;
+      return Game.countDocuments({releaseDate: years, genre: genres});
+    })
+    .then(count => {
+      res.status(200).json({
+        update: true,
+        games: fetchedGames,
+        maxGames: count
+      })
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: "Something went wrong!"
+      })
+    });
+  }
+});
+
 router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
+  //const releaseDate = req.params.releaseDate;
+  //if (!releaseDate){}
+  let g= ["maze"];
   const gameQuery = Game.find();
   let fetchedGames;
   if (pageSize && currentPage){
@@ -24,6 +98,34 @@ router.get("", (req, res, next) => {
       message: "Games fetched successfully!",
       games: fetchedGames,
       maxGames: count
+    });
+  })
+});
+
+router.get("/genres", (req, res, next) => {
+  Game.distinct("genre")
+  .then(result => {
+    res.status(200).json({
+      genres:result
+    })
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      message: "Something went wrong!"
+    });
+  })
+});
+
+router.get("/years", (req, res, next) => {
+  Game.distinct("releaseDate")
+  .then(result => {
+    res.status(200).json({
+      years:result
+    })
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      message: "Something went wrong!"
     });
   })
 });

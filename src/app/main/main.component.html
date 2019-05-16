@@ -1,21 +1,37 @@
-<!--
-<div fxLayout="row">
-<mat-accordion  *ngFor="let game of games" >
-  <mat-expansion-panel>
-    <mat-expansion-panel-header >
-      {{game.title}}
-    </mat-expansion-panel-header>
-    {{game.description}}
-    <mat-action-row>
-      <a mat-raised-button [routerLink]="['/games', game.id]" routerLinkActive="router-link-active" >Tovább az adatlapra</a>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-</div>
--->
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <div *ngIf="!isLoading && this.games.length>0">
-  <mat-card *ngFor="let game of games">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Search/Query paramters</mat-panel-title>
+    </mat-expansion-panel-header>
+    <form  *ngIf="!isLoading" (submit)="search(searchForm)" #searchForm="ngForm">
+    <div fxLayout="row">
+      <mat-card class="checkbox" >
+        <mat-card-content>
+          <h2 class="example-h2">Genres</h2>
+          <section class="example-section" fxLayout="Column">
+            <mat-checkbox name="{{item.getFullYear()}}" ngModel *ngFor="let item of years">{{item.getFullYear()}}</mat-checkbox>
+          </section>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="checkbox">
+        <mat-card-content>
+          <h2 class="example-h2">Years</h2>
+          <section class="example-section" fxLayout="Column">
+            <mat-checkbox name="{{item}}" ngModel *ngFor="let item of genres">{{item}}</mat-checkbox>
+          </section>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <mat-action-row>
+      <button mat-raised-button type="submit">Search</button>
+    </mat-action-row>
+  </form>
+
+  </mat-expansion-panel>
+
+
+  <mat-card *ngFor="let game of games" class="games">
     <mat-card-header>
         <mat-card-title>{{game.title}}</mat-card-title>
     </mat-card-header>

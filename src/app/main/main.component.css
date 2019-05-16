@@ -5,7 +5,7 @@
 
 }*/
 
-mat-card {
+.games{
   margin-left: 25%;
   margin-right: 25%;
   margin-top: 1%;
@@ -17,6 +17,11 @@ mat-card img{
   height: 40%;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.checkbox {
+  width: 30%;
+  margin: auto;
 }
 
 mat-paginator {

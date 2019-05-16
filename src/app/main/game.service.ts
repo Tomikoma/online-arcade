@@ -8,11 +8,14 @@ import { MyComment } from './game/mycomment.model';
 @Injectable({providedIn: 'root'})
 export class GameService {
 
+
   private games: Game[] = [];
   private gamesUpdated = new Subject<{games: Game[], gameCount: number}>();
   private oneGameUpdated = new Subject<Game>();
   private ratingUpdateListener = new Subject<{rating: number, count: number}>();
   private commentsUpdateListener = new Subject<MyComment[]>();
+  private yearsUpdateListener = new Subject<Date[]>();
+  private genresUpdateListener = new Subject<string[]>();
   constructor(private http: HttpClient) {}
 
   /*getGames() {
@@ -23,6 +26,36 @@ export class GameService {
       this.gamesUpdated.next([...this.games]);
     });
   }*/
+
+  getYears() {
+    this.http.get<{years: Date[]}>('http://localhost:3000/api/games/years')
+      .subscribe(yearData => {
+        let years = [];
+        yearData.years.forEach(year => {
+          years.push(new Date(year));
+        });
+        this.yearsUpdateListener.next(years);
+      });
+  }
+
+  getGenres() {
+    this.http.get<{genres: string[]}>('http://localhost:3000/api/games/genres')
+      .subscribe(genreData => {
+        this.genresUpdateListener.next(genreData.genres);
+      });
+  }
+
+  getGamesBySearch(searchYears: string[], searchGenres: string[]) {
+    this.http.post<{update: boolean, games: any[], maxCount: number}>('http://localhost:3000/api/games/search',
+     {years: searchYears, genres: searchGenres})
+      .subscribe(searchData => {
+        if (!searchData.update) {
+          return;
+        } else {
+          this.gamesUpdated.next({games: searchData.games,gameCount: searchData.maxCount});
+        }
+      });
+  }
 
   getGames(gamesPerPage: number, currentPage: number) {
     const queryParams =  `?pagesize=${gamesPerPage}&page=${currentPage}`;
@@ -95,6 +128,14 @@ export class GameService {
     .subscribe(ratingData => {
       this.ratingUpdateListener.next({rating: ratingData.rating, count: ratingData.count});
     });
+  }
+
+  getGenresUpdateListener() {
+    return this.genresUpdateListener.asObservable();
+  }
+
+  getYearsUpdateListener() {
+    return this.yearsUpdateListener.asObservable();
   }
 
   getCommentsUpdateListener() {

@@ -14,7 +14,8 @@ import {
   MatInputModule,
   MatSliderModule,
   MatListModule,
-  MatDividerModule
+  MatDividerModule,
+  MatCheckboxModule
     } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -27,6 +28,8 @@ import { MainComponent } from './main/main.component';
 import { GameComponent} from './main/game/game.component';
 import { CabinetComponent } from './main/game/cabinet/cabinet.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { BlockComponent } from './main/game/cabinet/block/block.component';
+import { JumbotronComponent } from './main/game/cabinet/jumbotron/jumbotron.component';
 
 
 @NgModule({
@@ -37,7 +40,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     RegisterComponent,
     MainComponent,
     GameComponent,
-    CabinetComponent
+    CabinetComponent,
+    BlockComponent,
+    JumbotronComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MatSliderModule,
     MatListModule,
     MatDividerModule,
+    MatCheckboxModule,
     FlexLayoutModule
   ],
   providers: [
