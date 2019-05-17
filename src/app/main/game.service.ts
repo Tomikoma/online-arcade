@@ -4,6 +4,9 @@ import { Game } from './game.model';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MyComment } from './game/mycomment.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({providedIn: 'root'})
 export class GameService {
@@ -20,7 +23,7 @@ export class GameService {
   constructor(private http: HttpClient) {}
 
   /*getGames() {
-    this.http.get<{message: string; games: any}>('http://localhost:3000/api/games')
+    this.http.get<{message: string; games: any}>(BACKEND_URL + 'games')
     .subscribe(gameData => {
       console.log(gameData.message);
       this.games = gameData.games;
@@ -29,7 +32,7 @@ export class GameService {
   }*/
 
   getYears() {
-    this.http.get<{years: Date[]}>('http://localhost:3000/api/games/years')
+    this.http.get<{years: Date[]}>(BACKEND_URL + 'games/years')
       .subscribe(yearData => {
         let years = [];
         yearData.years.forEach(year => {
@@ -40,7 +43,7 @@ export class GameService {
   }
 
   getGenres() {
-    this.http.get<{genres: string[]}>('http://localhost:3000/api/games/genres')
+    this.http.get<{genres: string[]}>(BACKEND_URL + 'games/genres')
       .subscribe(genreData => {
         this.genresUpdateListener.next(genreData.genres);
       });
@@ -51,7 +54,7 @@ export class GameService {
       this.getGames(5, 1);
       return;
     }
-    this.http.post<{games: any[], maxCount: number}>('http://localhost:3000/api/games/search',
+    this.http.post<{games: any[], maxCount: number}>(BACKEND_URL + 'games/search',
      {years: searchYears, genres: searchGenres})
      .pipe(
       map(gameData => {
@@ -78,7 +81,7 @@ export class GameService {
   getGames(gamesPerPage: number, currentPage: number) {
     const queryParams =  `?pagesize=${gamesPerPage}&page=${currentPage}`;
     this.http
-      .get<{ message: string; games: any , maxGames: number}>('http://localhost:3000/api/games' + queryParams)
+      .get<{ message: string; games: any , maxGames: number}>(BACKEND_URL + 'games' + queryParams)
       .pipe(
         map(gameData => {
           // console.log(gameData);
@@ -104,7 +107,7 @@ export class GameService {
   }
 
   getGame(id: string) {
-    this.http.get<{game: any}>('http://localhost:3000/api/games/' + id)
+    this.http.get<{game: any}>(BACKEND_URL + 'games/' + id)
       .subscribe(gameData => {
         let game = gameData.game;
         game.releaseDate = new Date(game.releaseDate);
@@ -114,7 +117,7 @@ export class GameService {
   }
 
   rateGame(rating: number, gameId: string){
-    this.http.post('http://localhost:3000/api/games/rate', {rating, gameId})
+    this.http.post(BACKEND_URL + 'games/rate', {rating, gameId})
       .subscribe(response => {
         console.log(response);
         this.getRating(gameId);
@@ -123,7 +126,7 @@ export class GameService {
 
   comment(content: string, gameId: string) {
     const commentData = {content, gameId, commentDate: new Date()};
-    this.http.post('http://localhost:3000/api/games/comment', commentData)
+    this.http.post(BACKEND_URL + 'games/comment', commentData)
       .subscribe(response => {
         console.log(response);
         this.getComments(gameId);
@@ -131,7 +134,7 @@ export class GameService {
   }
 
   getComments(gameId: string) {
-    this.http.get<{comments: any[]}>('http://localhost:3000/api/games/comment/' + gameId)
+    this.http.get<{comments: any[]}>(BACKEND_URL + 'games/comment/' + gameId)
       .subscribe(commentData => {
         commentData.comments.forEach(comment => {
           comment.commentDate = new Date(comment.commentDate);
@@ -142,7 +145,7 @@ export class GameService {
   }
 
   getRating(gameId: string) {
-    this.http.get<{rating: number, count: number}>('http://localhost:3000/api/games/rate/' + gameId)
+    this.http.get<{rating: number, count: number}>(BACKEND_URL + 'games/rate/' + gameId)
     .subscribe(ratingData => {
       this.ratingUpdateListener.next({rating: ratingData.rating, count: ratingData.count});
     });
