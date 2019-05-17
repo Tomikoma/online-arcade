@@ -47,14 +47,31 @@ export class GameService {
   }
 
   getGamesBySearch(searchYears: string[], searchGenres: string[]) {
-    this.http.post<{update: boolean, games: any[], maxCount: number}>('http://localhost:3000/api/games/search',
+    if (searchYears.length === 0 && searchGenres.length === 0) {
+      this.getGames(5, 1);
+      return;
+    }
+    this.http.post<{games: any[], maxCount: number}>('http://localhost:3000/api/games/search',
      {years: searchYears, genres: searchGenres})
+     .pipe(
+      map(gameData => {
+        return {games: gameData.games.map(game => {
+          return {
+            id: game._id,
+            title: game.title,
+            releaseDate: new Date(game.releaseDate),
+            genre: game.genre,
+            images: game.images,
+            description: game.description,
+            modes: game.modes,
+          };
+        }),
+        maxGames: gameData.maxCount,
+      };
+      })
+    )
       .subscribe(searchData => {
-        if (!searchData.update) {
-          return;
-        } else {
-          this.gamesSearchUpdated.next({games: searchData.games,gameCount: searchData.maxCount});
-        }
+        this.gamesSearchUpdated.next({games: searchData.games,gameCount: searchData.maxGames});
       });
   }
 

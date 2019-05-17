@@ -1,7 +1,8 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-expansion-panel *ngIf="!isloading">
+<mat-expansion-panel *ngIf="!isLoading">
     <mat-expansion-panel-header>
-      <mat-panel-title> Search/Query paramters</mat-panel-title>
+      <mat-panel-title> Filter</mat-panel-title>
+      <mat-panel-description>Years/Genres</mat-panel-description>
     </mat-expansion-panel-header>
     <form  *ngIf="!isLoading" (submit)="search(searchForm)" #searchForm="ngForm">
     <div fxLayout="row">

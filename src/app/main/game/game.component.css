@@ -4,9 +4,10 @@ mat-card {
   margin-right: 10%;
   margin-top: 1%;
 }
+
 mat-card img{
-  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
-  width: 40%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  object-fit: cover;
+  width: 40%;
   height: 40%;
   margin-left: 5%;
   margin-right: 5%;

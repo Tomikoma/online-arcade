@@ -10,13 +10,7 @@ router.post("/search", (req, res, next) => {
   const years = req.body.years;
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
-
-
-  if(genres.length==0 && years.length==0) {
-    return res.status(200).json({
-      update: false
-    });
-  } else if(genres.length>0 && years.length==0) {
+  if(genres.length>0 && years.length==0) {
     const gameQuery = Game.find({genre: genres});
     let fetchedGames;
     gameQuery.then(documents => {
@@ -25,16 +19,15 @@ router.post("/search", (req, res, next) => {
     })
     .then(count => {
       res.status(200).json({
-        update: true,
         games: fetchedGames,
         maxGames: 0
-      }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-          message: "Something went wrong!"
-        })
-      });
-    })
+      })
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: "Something went wrong!"
+      })
+    });
   } else if(genres.length==0 && years.length>0) {
     const gameQuery = Game.find({releaseDate: years});
     let fetchedGames;
@@ -44,16 +37,15 @@ router.post("/search", (req, res, next) => {
     })
     .then(count => {
       res.status(200).json({
-        update: true,
         games: fetchedGames,
         maxGames: 0
-      }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-          message: "Something went wrong!"
-        })
-      });
-    })
+      })
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: "Something went wrong!"
+      })
+    });
   } else if (genres.length>0 && years.length>0) {
     const gameQuery = Game.find({releaseDate: years, genre: genres});
     let fetchedGames;
@@ -63,7 +55,6 @@ router.post("/search", (req, res, next) => {
     })
     .then(count => {
       res.status(200).json({
-        update: true,
         games: fetchedGames,
         maxGames: 0
       })

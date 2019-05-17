@@ -1,5 +1,6 @@
 const path = require("path");
 const express=require("express");
+//const cors = require("cors");
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose")
 
@@ -20,9 +21,11 @@ mongoose.connect("mongodb+srv://tom:MVwYEXXFzW1r5sVa@onlinearcade-1uy5h.mongodb.
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
+//app.use(cors())
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
+app.use("/",express.static(path.join(__dirname,"angular")))
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -39,6 +42,9 @@ app.use((req, res, next) => {
 
 app.use("/api/games", gamesRoutes);
 app.use("/api/user", userRoutes);
+app.use((req,res,next) => {
+  res.sendFile(path.join(__dirname,"angular","index.html"))
+})
 
 
 module.exports = app;

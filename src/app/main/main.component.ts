@@ -52,7 +52,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   search(form: NgForm) {
-    console.log(form.value['1980']);
     const searchYears = [];
     const searchGenres = [];
     const years = [];
@@ -74,7 +73,6 @@ export class MainComponent implements OnInit, OnDestroy {
     this.gameService.getGamesBySearch(searchYears, searchGenres);
     this.gameSearchSub = this.gameService.getGameSearchUpdatedListener()
       .subscribe(data => {
-        console.log(data);
         this.games = data.games;
       });
   }
